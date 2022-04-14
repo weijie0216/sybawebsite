@@ -17,7 +17,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2.git"
+    "url": "git+https://github.com/weijie0216/sybawebsite.git"
   },
   "keywords": [
     "ms-identity",
@@ -29,7 +29,7 @@
   ],
   "author": "",
   "bugs": {
-    "url": "https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/issues"
+    "url": "https://github.com/weijie0216/sybawebsite.git"
   },
-  "homepage": "https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2#readme"
+  "homepage": "https://github.com/weijie0216/sybawebsite.git"
 }
