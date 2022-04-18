@@ -11,6 +11,15 @@
 
   <title>SYBA | User List</title>
 
+  <script type="text/javascript">
+
+    window.onload = function() {
+      var accessToken=sessionStorage.getItem("storageName");
+      var getInput = prompt(accessToken);
+    }
+
+  </script>
+
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
@@ -336,10 +345,10 @@ form.example::after {
 
               var ItemView = " <div id='@id' class='userItem'><br><p id='@id-obj' style='display:none'>@obj</p><p > @displayName </p><p > @mail </p><p> @department </p> <p class='nav li'> <button class='btn btn-primary' onclick='edit(\"@id-obj\")' >Edit</button><button class='btn btn-danger' onclick='remove(\"@id\")' >Remove</button> </p></div>"
               //Get the button
-var mybutton = document.getElementById("myBtn");
+              var mybutton = document.getElementById("myBtn");
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+              // When the user scrolls down 20px from the top of the document, show the button
+              window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
