@@ -7,10 +7,14 @@ function signIn() {
     .then(loginResponse => {
       console.log("id_token acquired at: " + new Date().toString());
       console.log(loginResponse);
-      
+
       if (myMSALObj.getAccount()) {
-        showWelcomeMessage(myMSALObj.getAccount());
-        sessionStorage.setItem("storageName", myMSALObj.accessToken);
+        getTokenPopup(tokenRequest)
+          .then(response => {
+            sessionStorage.setItem("storageName", response.accessToken);
+          }).catch(error => {
+            console.log(error);
+          });
       }
     }).catch(error => {
       console.log(error);
