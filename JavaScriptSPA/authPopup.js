@@ -9,6 +9,7 @@ function signIn() {
       console.log(loginResponse);
 
       if (myMSALObj.getAccount()) {
+        showWelcomeMessage(myMSALObj.getAccount());
         getTokenPopup(tokenRequest)
           .then(response => {
             sessionStorage.setItem("storageName", response.accessToken);
