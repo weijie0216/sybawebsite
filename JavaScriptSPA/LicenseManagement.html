@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link rel="shortcut icon" href="../img/favicon.png">
+
+  <title>SYBA | License Management</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- full calendar css-->
+  <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+  <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+  <!-- easy pie chart-->
+  <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+  <!-- owl carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+  <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/fullcalendar.css">
+  <link href="css/widgets.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet" />
+  <link href="css/xcharts.min.css" rel=" stylesheet">
+  <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+  <!-- =======================================================
+    Theme Name: NiceAdmin
+    Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+ 
+</head>
+
+<body>
+  <!-- container section start -->
+  <section id="container" class="">
+
+
+    <header class="header white-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+      </div>
+
+      <!--logo start-->
+      
+      <a href="index.html" class="logo mr-auto"><img src="../img/syba.png" width="200" height="40" alt="" class="img-fluid"></a>
+      <!--logo end-->
+
+     
+      </div>
+
+      
+                   <!-- user login dropdown start-->
+          <!-- user login dropdown end -->
+        </ul>
+        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu">
+            <li class="active">
+              <a class="" href="index.html">
+                            <i class="icon_house_alt"></i>
+                            <span>Home</span>
+                        </a>
+            </li>
+            <li class="sub-menu">
+              <a href="javascript:;" class="">
+                            <i class="icon_desktop"></i>
+                            <span>User Management</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+              <ul class="sub">
+                <li><a class="" href="Adduser.html">Add User</a></li>
+                <li><a class="" href="Userlist.html">User List</a></li>
+                <li><a class="active" href="assignlicense.html">Assign License</a></li>
+                <li><a class="" href="auditlog.html">Audit Log</a></li>
+                
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <a class="javascript:;" class="">
+                            <i class="icon_genius"></i>
+                            <span>Cost Management</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" href="0365Products.html">Office Products</a></li>
+                            <li><a class="" href="LicenseManagement.html">License Management</a></li>
+                          </ul>
+            </li>
+            <li>
+              <a class="" href="">
+                            <i class="icon_piechart"></i>
+                            <span>ACM</span>
+   
+                        </a>
+   
+                      </li>
+          </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-list-alt"></i>Assign License</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="fa fa-list-alt"></i>Assign License</li>
+            </ol>
+          </div>
+        </div>
+        <!-- Today status end -->
+
+        <html>
+            <style>
+                .filterItem  {
+                  background-color:lightblue; 
+                  margin: 2px;
+                }
+        
+                .LicenseDetails div{
+                    display: inline-block;
+                    border: 1px solid green;
+                    }
+        
+                .LicenseDetails p{
+                    text-align: center;
+                }
+                .LicenseDetails label{
+                    margin: 5px;
+                }
+        
+                .userItem {
+                  background-color:lightgrey; 
+                  list-style-type: none;
+                  margin: 0;
+                  padding: 0;
+                  width: 80%;
+                }
+                
+                .userItem p {
+                  display: inline-block;
+                  width:30%;
+                }
+        
+                .loadMore {
+                    background-color: aqua;
+                    font-style: italic; 
+                    text-align: center; 
+                    padding-top: 5px;
+                    width: 40%;
+                }
+        
+            </style>
+        
+            <body>
+                <div id="message"></div>
+                <div id="LicenseDetails" class="LicenseDetails">
+                    <div >
+                        <label>Assigned</label>
+                        <p id="assigned"></p>
+                    </div>
+                    <div >
+                        <label>Unassigned</label>
+                        <p id="unassigned"></p>
+                    </div>
+                    <div >
+                        <label>All Licenses</label>
+                        <p id="all"></p>
+                    </div>
+                </div>
+        
+                <div id="filterDemo" >
+                    <div class = "filterItem" onclick="getAssignedUsers('05e9a617-0261-4cee-bb44-138d3ef5d965',this)"> 
+                        <label>Microsoft 365 E3: Click to get all users assigned with Microsoft 365 E3 License </label>
+                        <div id="assignedUserList"></div>
+                    </div>
+                    <div class = "filterItem" onclick="getAssignedUsers('84a661c4-e949-4bd2-a560-ed7766fcaf2b',this)"> 
+                        <label>Azure Active Directory Premium P2: Click to get all users assigned with Azure Active Directory Premium P2 </label>
+                        <div id="assignedUserList"></div>
+                    </div>
+                </div>
+                <br>
+                Click to get license details:
+                
+                <div id="userListView">
+                    <br><label for="department">Department:</label>
+        
+                    <select  id="department" onchange="getUsersByDep(this)" >
+                        <option value="All">All</option>
+                        <option value="Consulting Services">Consulting Services</option>
+                        <option value="Managed Services">Managed Services</option>
+                        <option value="Project Management Office">Project Management Office</option>
+                        <option value="Account">Account</option>
+                        <option value="Human Resources">Human Resources</option>
+                        <option value="Business Development">Business Development</option>
+                    </select>
+        
+                    User: <input onchange="getUserByDisplayName(this)">
+        
+                    <div class="userItem" style="background-color: whitesmoke;font-style: italic;">
+
+        <br>
+                        <p> User Display Name </p>
+                        <p> User Email Address </p>
+                        <p> Department </p>
+        
+                    </div>
+                    <div id="userList"></div>
+                    <div id="loadMore" class="loadmore"></div>
+                   
+
+                </div>
+            </body>
+        
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+            <script>
+                var accessToken=sessionStorage.getItem("storageName");
+        
+                var  ItemView = " <div onClick='getUserAssignedSku(this)' id='@id' class='userItem'><hr><p> @displayName </p><p > @mail </p><p > @department </p><div id='licenses'></div></div>"
+        
+                function getSubSku(){
+        
+                    $.ajax({
+                        url: "https://graph.microsoft.com/v1.0/subscribedSkus",
+                        type: 'get',
+                        headers: {
+                            "Content-type": 'application/json', 
+                            "Authorization":"Bearer " + accessToken
+                        },
+                        success: function (data) {
+        
+                            var allSkus = data.value;
+                            var assigned = 0;
+                            var all = 0;
+                            allSkus.forEach(element=>{
+                                if(element.appliesTo=="User" && element.capabilityStatus == "Enabled"){
+                                    assigned += element.consumedUnits;
+                                    all += element.prepaidUnits.enabled;
+                                }
+                            });
+        
+                            $("#assigned").html(assigned);
+                            $("#unassigned").html(all - assigned);
+                            $("#all").html(all);
+                        },
+                        error:function(data){
+                            var response = JSON.parse(data.responseText)
+                            document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                        }
+                    });
+                }
+        
+                function getAssignedUsers(skuID,obj){
+                    $.ajax({
+                        url: "https://graph.microsoft.com/v1.0/users?$filter=assignedLicenses/any(x:x/skuId eq "+ skuID+")",
+                        type: 'get',
+                        headers: {
+                            "Content-type": 'application/json', 
+                            "Authorization":"Bearer " + accessToken
+                        },
+                        success: function (data) {
+                           var users = data.value;
+                           var userList = $(obj).find("#assignedUserList");
+                           userList.empty();
+                           users.forEach(element => {
+                               userList.append("<div style='background-color:lightyellow;'>"+element.displayName+":" + element.mail+ "</div>")
+                           });
+                        },
+                        error:function(data){
+                            var response = JSON.parse(data.responseText)
+                            document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                        }
+                    });
+        
+                }
+        
+                function getUserAssignedSku(obj){
+                    var id = $(obj).attr("id"); 
+                    var licenses = $(obj).find("#licenses");
+                    var total = 0;
+                    licenses.empty();
+                    $.ajax({
+                        url: "https://graph.microsoft.com/v1.0/users/"+id+"/licenseDetails",
+                        type: 'get',
+                        headers: {
+                            "Content-type": 'application/json', 
+                            "Authorization":"Bearer " + accessToken
+                        },
+                        success: function (data) {
+                            $("#userAssignedSkus").empty();
+                            var assigned = data.value; 
+                            if(assigned.length ==0){
+                                var assignedLicneses = "<div style='background-color:lightyellow;'>No license assigned</div>"
+                                licenses.append(assignedLicneses);
+                            }else{
+                                assigned.forEach(element=>{
+                                    var displayName = skuNameMapping[element.skuPartNumber]===undefined?element.skuPartNumber:skuNameMapping[element.skuPartNumber];
+                                    var assignedLicneses = "<div style='background-color:lightyellow;'>"+ displayName +"</div>"
+                                    licenses.append(assignedLicneses);
+                                    
+                                });
+                                var totalView = "<div style='background-color:lightyellow;'>"+ assigned.length  +" License(s)</div>"
+                                licenses.append(totalView);
+                            }
+                            
+                        },
+                        error:function(data){
+                            var response = JSON.parse(data.responseText)
+                            document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                        }
+                    });
+                }
+                function getUsersByDep(obj){
+                    var dep = $(obj).val();
+                    getUsers(dep=="All"?null:dep);
+                }
+        
+                function getUserByDisplayName(obj){
+                    var dep = $("#department").val()
+                    
+                    var username = $(obj).val();
+                    getUsers(dep=="All"?null:dep,username);
+                }
+        
+               
+                function getUsers(department,userDispayName){
+                    var filter = "";
+                    $("#userList").empty();
+                    if(department){
+                        filter += "department eq '"+department+ "'";
+                    }
+        
+                    if(userDispayName){
+                        if(filter==""){
+                            filter += "startswith(displayName,'"+userDispayName+"')";
+                        }else{
+                            filter += "and startswith(displayName,'"+userDispayName+"')";
+                        }
+                        
+                    }
+        
+                    $("#loadMore").empty();
+                    $.ajax({
+                        url: 'https://graph.microsoft.com/v1.0/users?$select=id,displayName,mail,department&$top=5&$filter=' + filter,
+                        type: 'get',
+                        headers: {
+                            "Content-type": 'application/json', 
+                            "Authorization":"Bearer " + accessToken
+                        },
+                        success: function (data) {
+                            var userlist = data.value;
+                            var nextpageUrl = data['@odata.nextLink'];
+                            if(nextpageUrl){
+                                $("#loadMore").append("<div onclick='loadMore(\""+ nextpageUrl  +" \")'><button class='btn btn-default'>load more...</button></div>");
+                            }
+                            userlist.forEach(element => {
+                                var view = ItemView.replace(/@id/g,element.id).replace("@displayName",element.displayName).replace("@mail",element.mail).replace("@department",element.department==null?" ":element.department);
+        
+                                $("#userList").append(view);
+                            });
+                        },
+                        error:function(data){
+                            var response = JSON.parse(data.responseText)
+                        document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                        }
+                    });
+                }
+        
+                function loadMore(url){
+        
+                    $.ajax({
+                        url: url,
+                        type: 'get',
+                        headers: {
+                            "Content-type": 'application/json', 
+                            "Authorization":"Bearer " + accessToken
+                        },
+                        success: function (data) {
+                            var userlist = data.value;
+                            var nextpageUrl = data['@odata.nextLink'];
+                            
+                            if(nextpageUrl){
+                                $("#loadMore").empty();
+                                $("#loadMore").append("<div onclick='loadMore(\""+ nextpageUrl  +" \")'>load more...</div>");
+                            }else{
+                                $("#loadMore").empty();
+                            }
+                            userlist.forEach(element => {
+                                var view = ItemView.replace(/@id/g,element.id).replace("@displayName",element.displayName).replace("@mail",element.mail).replace("@department",element.department==null?" ":element.department);
+                                $("#userList").append(view);
+                            });
+                        },
+                        error:function(data){
+                            var response = JSON.parse(data.responseText)
+                            document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                        }
+                    });
+                }
+        
+                function intPage(){
+                    getSubSku();
+                    getUsers();
+                }
+        
+                var skuNameMapping = {
+                    "AAD_BASIC": "Azure Active Directory Basic",
+                    "AAD_BASIC_EDU": "Azure Active Directory Basic for EDU",
+                    "AAD_EDU": "Azure Active Directory for Education",
+                    "AAD_PREMIUM": "Azure Active Directory Premium P1",
+                    "AAD_PREMIUM_P2": "Azure Active Directory Premium P2",
+                    "AAD_SMB": "Azure Active Directory",
+                    "ADALLOM_S_DISCOVERY": "Cloud App Security Discovery",
+                    "ADALLOM_S_O365": "Office 365 Advanced Security Management",
+                    "ADALLOM_S_STANDALONE": "Microsoft Cloud App Security",
+                    "ATA": "Azure Advanced Threat Protection",
+                    "ATP_ENTERPRISE": "Office 365 Advanced Threat Protection (Plan 1)",
+                    "ATP_ENTERPRISE_FACULTY": "Exchange Online Advanced Threat Protection",
+                    "AX_ENTERPRISE_USER": "Microsoft Dynamics AX Enterprise",
+                    "AX_SELF-SERVE_USER": "Microsoft Dynamics AX Self-Serve",
+                    "AX7_USER_TRIAL": "Microsoft Dynamics AX7 User Trial",
+                    "BI_AZURE_P0": "Power BI (free)",
+                    "BI_AZURE_P1": "Microsoft Power BI Reporting And Analytics Plan 1",
+                    "BI_AZURE_P2": "Power BI Pro",
+                    "BPOS_S_TODO_1": "To-do (Plan 1)",
+                    "BPOS_S_TODO_2": "To-do (Plan 2)",
+                    "BPOS_S_TODO_3": "To-do (Plan 3)",
+                    "BPOS_S_TODO_FIRSTLINE": "To-do (Firstline)",
+                    "COMMUNICATIONS_COMPLIANCE": "Microsoft Communications Compliance",
+                    "COMMUNICATIONS_DLP": "Microsoft Communications Dlp",
+                    "CRMENTERPRISE": "Microsoft Dynamics CRM Online Enterprise",
+                    "CRMIUR": "CRM for Partners",
+                    "CRMPLAN2": "Microsoft Dynamics CRM Online Basic",
+                    "CRMSTANDARD": "Microsoft Dynamics CRM Online",
+                    "CRMSTANDARD_GCC": "Microsoft Dynamics CRM Online Government Professional",
+                    "CRMSTORAGE": "Microsoft Dynamics CRM Storage",
+                    "CRMTESTINSTANCE": "Microsoft Dynamics CRM Test Instance",
+                    "CUSTOMER_KEY": "Microsoft Customer Key",
+                    "DATA_INVESTIGATIONS": "Microsoft Data Investigations",
+                    "DDYN365_CDS_DYN_P2": "Common Data Service",
+                    "Deskless": "Microsoft Staffhub",
+                    "DESKLESSPACK": "Office 365 F1",
+                    "DESKLESSPACK_GOV": "Office 365 F1 for Government",
+                    "DESKLESSPACK_YAMMER": "Office 365 F1 with Yammer",
+                    "DESKLESSWOFFPACK": "Office 365 Kiosk P2",
+                    "DESKLESSWOFFPACK_GOV": "Office 365 Kiosk P2 for Government",
+                    "DEVELOPERPACK": "Office 365 E3 Developer",
+                    "DEVELOPERPACK_GOV": "Office 365 Developer for Government",
+                    "DMENTERPRISE": "Microsoft Dynamics Marketing Online Enterprise",
+                    "DYN365_BUSINESS_MARKETING": "Dynamics 365 for Marketing",
+                    "DYN365_CDS_DYN_APPS": "Common Data Service",
+                    "DYN365_CDS_PROJECT": "Common Data Service for Project",
+                    "DYN365_CDS_VIRAL": "Common Data Service",
+                    "DYN365_ENTERPRISE_CUSTOMER_SERVICE": "Dynamics 365 for Customer Service Enterprise Edition",
+                    "DYN365_ENTERPRISE_P1": "Dynamics 365 Customer Engagement Plan",
+                    "DYN365_ENTERPRISE_P1_IW": "Dynamics 365 P1 Trial for Information Workers",
+                    "DYN365_ENTERPRISE_PLAN1": "Dynamics 365 Customer Engagement Plan Enterprise Edition",
+                    "DYN365_ENTERPRISE_SALES": "Dynamics 365 for Sales Enterprise Edition",
+                    "DYN365_ENTERPRISE_SALES_CUSTOMERSERVICE": "Dynamics 365 for Sales And Customer Service Enterprise Edition",
+                    "DYN365_Enterprise_Talent_Attract_TeamMember": "Dynamics 365 for Talent - Attract Experience Team Member",
+                    "DYN365_Enterprise_Talent_Onboard_TeamMember": "Dynamics 365 for Talent - Onboard Experience",
+                    "DYN365_ENTERPRISE_TEAM_MEMBERS": "Dynamics 365 for Team Members Enterprise Edition",
+                    "DYN365_FINANCIALS_BUSINESS": "Dynamics 365 for Financials",
+                    "DYN365_FINANCIALS_BUSINESS_SKU": "Dynamics 365 for Financials Business Edition",
+                    "DYN365_FINANCIALS_TEAM_MEMBERS_SKU": "Dynamics 365 for Team Members Business Edition",
+                    "DYN365_RETAIL_TRIAL": "Dynamics 365 for Retail Trial",
+                    "DYN365_TALENT_ENTERPRISE": "Dynamics 365 for Talent",
+                    "DYN365_TEAM_MEMBERS": "Dynamics 365 Team Members",
+                    "Dynamics_365_for_Operations": "Dynamics 365 Unf Ops Plan Ent Edition",
+                    "Dynamics_365_for_Retail": "Dynamics 365 for Retail",
+                    "Dynamics_365_for_Retail_Team_members": "Dynamics 365 for Retail Team Members",
+                    "Dynamics_365_for_Talent_Team_members": "Dynamics 365 for Talent Team Members",
+                    "Dynamics_365_Onboarding_Free_PLAN": "Dynamics 365 for Talen:Onboard",
+                    "Dynamics_365_Onboarding_SKU": "Dynamics 365 for Talent:Onboard",
+                    "ECAL_SERVICES": " ECAL Services(EOA, EOP, DLP)",
+                    "EducationAnalyticsP1": "Education Analytics",
+                    "EDUPACK_FACULTY": "Office 365 Education for Faculty",
+                    "EDUPACK_STUDENT": "Office 365 Education for Students",
+                    "EMS": "Enterprise Mobility + Security E3",
+                    "EMSPREMIUM": "Enterprise Mobility + Security E5",
+                    "ENTERPRISEPACK": "Office 365 E3",
+                    "ENTERPRISEPACK_FACULTY": "Office 365 Education E3 for Faculty",
+                    "ENTERPRISEPACK_GOV": "Office 365 Enterprise E3 for Government",
+                    "ENTERPRISEPACK_STUDENT": "Office 365 Education E3 for Students",
+                    "ENTERPRISEPACKLRG": "Office 365 (Plan E3)",
+                    "ENTERPRISEPACKWITHOUTPROPLUS": "Office 365 Enterprise E3 without ProPlus Add-on",
+                    "ENTERPRISEPACKWSCAL": "Office 365 Enterprise E4",
+                    "ENTERPRISEPREMIUM": "Office 365 E5",
+                    "ENTERPRISEPREMIUM_FACULTY": "Office 365 A5 for Faculty",
+                    "ENTERPRISEPREMIUM_NOPSTNCONF": "Office 365 E5 Without Audio Conferencing",
+                    "ENTERPRISEPREMIUM_STUDENT": "Office 365 A5 for Students",
+                    "ENTERPRISEWITHSCAL": "Office 365 E4",
+                    "ENTERPRISEWITHSCAL ": "Office 365 Enterprise E4",
+                    "ENTERPRISEWITHSCAL_FACULTY": "Office 365 Education E4 for Faculty",
+                    "ENTERPRISEWITHSCAL_GOV": "Office 365 Enterprise E4 for Government",
+                    "ENTERPRISEWITHSCAL_STUDENT": "Office 365 Education E4 for Students",
+                    "EOP_ENTERPRISE": "Exchange Online Protection",
+                    "EOP_ENTERPRISE_FACULTY": "Exchange Online Protection for Faculty",
+                    "EOP_ENTERPRISE_GOV": "Exchange Protection for Government",
+                    "EOP_ENTERPRISE_PREMIUM": "Exchange Enterprise CAL Services(EOP, DLP)",
+                    "EOP_ENTERPRISE_STUDENT": "Exchange Protection for Student",
+                    "EQUIVIO_ANALYTICS": "Office 365 Advanced Compliance",
+                    "EQUIVIO_ANALYTICS_FACULTY": "Office 365 Advanced Compliance for faculty",
+                    "EXCHANGE_ANALYTICS": "Microsoft Myanalytics (full)",
+                    "EXCHANGE_B_STANDARD": "Exchange Online Pop",
+                    "EXCHANGE_L_STANDARD": "Exchange Online (P1)",
+                    "EXCHANGE_ONLINE_WITH_ONEDRIVE_LITE": "Exchange with OneDrive for Business",
+                    "EXCHANGE_S_ARCHIVE": "Exchange Online Archiving for Exchange Server",
+                    "EXCHANGE_S_ARCHIVE_ADDON": "Exchange Online Archiving for Exchange Online",
+                    "EXCHANGE_S_ARCHIVE_ADDON_GOV": "Exchange Online Archiving",
+                    "EXCHANGE_S_DESKLESS": "Exchange Online Kiosk",
+                    "EXCHANGE_S_DESKLESS_GOV": "Exchange Online Kiosk for Government",
+                    "EXCHANGE_S_ENTERPRISE": "Exchange Online (Plan 2)",
+                    "EXCHANGE_S_ENTERPRISE_GOV": "Exchange Online P2 for Government",
+                    "EXCHANGE_S_ESSENTIALS": "Exchange Online Essentials",
+                    "EXCHANGE_S_FOUNDATION": "Exchange Foundation",
+                    "EXCHANGE_S_STANDARD": "Exchange Online (Plan 1)",
+                    "EXCHANGE_S_STANDARD_MIDMARKET": "Exchange Online Plan 1",
+                    "EXCHANGEARCHIVE": "Exchange Online Archiving for Exchange Server",
+                    "EXCHANGEARCHIVE_ADDON": "Exchange Online Archiving for Exchange Online",
+                    "EXCHANGEARCHIVE_FACULTY": "Exchange Archiving for Faculty",
+                    "EXCHANGEARCHIVE_GOV": "Exchange Archiving for Government",
+                    "EXCHANGEARCHIVE_STUDENT": "Exchange Archiving for Students",
+                    "EXCHANGEDESKLESS": "Exchange Online Kiosk",
+                    "EXCHANGEDESKLESS ": "Exchange Online Kiosk",
+                    "EXCHANGEDESKLESS_GOV": "Exchange Kiosk for Government",
+                    "EXCHANGEENTERPRISE": "Exchange Online (Plan 2)",
+                    "EXCHANGEENTERPRISE ": "Exchange Online Plan 2",
+                    "EXCHANGEENTERPRISE_FACULTY": "Exch Online Plan 2 for Faculty",
+                    "EXCHANGEENTERPRISE_GOV": "Exchange Online Plan 2 for Government",
+                    "EXCHANGEENTERPRISE_STUDENT": "Exchange (Plan 2 for Students)",
+                    "EXCHANGEESSENTIALS": "Exchange Online Essentials",
+                    "EXCHANGESTANDARD": "Exchange Online (Plan 1)",
+                    "EXCHANGESTANDARD_FACULTY": "Exchange (Plan 1 for Faculty)",
+                    "EXCHANGESTANDARD_GOV": "Exchange Online P1 for Government",
+                    "EXCHANGESTANDARD_STUDENT": "Exchange Online P1 for Students",
+                    "EXCHANGETELCO": "Exchange Online Pop",
+                    "FLOW_DYN_APPS": "Flow for Dynamics 365",
+                    "FLOW_DYN_P2": "Flow for Dynamics 365",
+                    "FLOW_DYN_TEAM": "Flow for Dynamics 365",
+                    "FLOW_FOR_PROJECT": "Flow for Project Online",
+                    "FLOW_FREE": "Flow Free",
+                    "FLOW_O365_P1": "Flow for Office 365",
+                    "FLOW_O365_P2": "Flow for Office 365",
+                    "FLOW_O365_P3": "Flow for Office 365",
+                    "FLOW_O365_S1": "Flow for Office 365 K1",
+                    "FLOW_P1": "Microsoft Flow Plan 1",
+                    "FLOW_P2": "Microsoft Flow Plan 2",
+                    "FLOW_P2_VIRAL": "Flow Free",
+                    "FLOW_P2_VIRAL_REAL": "Flow P2 Viral",
+                    "FORMS_PLAN_E1": "Microsoft Forms (Plan E1)",
+                    "FORMS_PLAN_E3": "Microsoft Forms (Plan E3)",
+                    "FORMS_PLAN_E5": "Microsoft Forms (Plan E5)",
+                    "FORMS_PLAN_K": "Microsoft Forms (Plan F1)",
+                    "FORMS_PRO": "Forms Pro Trial",
+                    "IDENTITY_THREAT_PROTECTION": "Microsoft 365 E5 Security",
+                    "IDENTITY_THREAT_PROTECTION_FOR_EMS_E5": "Microsoft 365 E5 Security for EMS E5",
+                    "INFO_GOVERNANCE": "Microsoft Information Governance",
+                    "INFOPROTECTION_P2": "Azure Information Protection Premium P2",
+                    "INFORMATION_BARRIERS": "Information Barriers",
+                    "INFORMATION_PROTECTION_COMPLIANCE": "Microsoft 365 E5 Compliance",
+                    "INTUNE_A": "Intune",
+                    "INTUNE_A_VL": "Intune VL",
+                    "INTUNE_EDU": "Intune for Education",
+                    "INTUNE_O365": "Mobile Device Management for Office 365",
+                    "INTUNE_O365_STANDALONE": "Mobile Device Management for Office 365",
+                    "INTUNE_SMBIZ": "INTUNE_SMBIZ",
+                    "IT_ACADEMY_AD": "Ms Imagine Academy",
+                    "IWs PROJECT_MADEIRA_PREVIEW_IW_SKU": "Dynamics 365 Business Central for",
+                    "KAIZALA_O365_P1": "Microsoft Kaizala Pro Plan 1",
+                    "KAIZALA_O365_P3": "Microsoft Kaizala Pro Plan 3",
+                    "KAIZALA_STANDALONE": "Microsoft Kaizala",
+                    "LITEPACK": "Office 365 Small Business",
+                    "LITEPACK_P2": "Office 365 Small Business Premium",
+                    "LOCKBOX": "Customer Lockbox",
+                    "LOCKBOX_ENTERPRISE": "Customer Lockbox",
+                    "M365_ADVANCED_AUDITING": "Microsoft 365 Advanced Auditing",
+                    "M365_F1": "Microsoft 365 F1",
+                    "M365EDU_A1": "Microsoft 365 A1",
+                    "M365EDU_A3_FACULTY": "Microsoft 365 A3 for Faculty",
+                    "M365EDU_A3_STUDENT": "Microsoft 365 A3 for Students",
+                    "M365EDU_A5_FACULTY": "Microsoft 365 A5 for Faculty",
+                    "M365EDU_A5_STUDENT": "Microsoft 365 A5 for Students",
+                    "MCO_TEAMS_IW": "Microsoft Teams (Conferencing)",
+                    "MCOEV": "Skype for Business Cloud Pbx",
+                    "MCOIMP": "Skype for Business Online (Plan 1)",
+                    "MCOIMP_FACULTY": "Lync (Plan 1 for Faculty)",
+                    "MCOIMP_GOV": "Lync for Government (Plan 1G)",
+                    "MCOIMP_STUDENT": "Lync (Plan 1 for Students)",
+                    "MCOINTERNAL": "Lync Internal Incubation and Corp to Cloud",
+                    "MCOLITE": "Skype for Business Online (Plan P1)",
+                    "MCOMEETADV": "Audio Conferencing",
+                    "MCOPSTN1": "Skype for Business Pstn Domestic Calling",
+                    "MCOPSTN2": "Skype for Business Pstn Domestic And International Calling",
+                    "MCOPSTN5": "Skype for Business Pstn Domestic Calling",
+                    "MCOSTANDARD": "Skype for Business Online (Plan 2)",
+                    "MCOSTANDARD_FACULTY": "Lync (Plan 2 for Faculty)",
+                    "MCOSTANDARD_GOV": "Skype for Business Online P2 for Government",
+                    "MCOSTANDARD_MIDMARKET": "Skype for Business Online (Plan 2) for Midsize",
+                    "MCOSTANDARD_STUDENT": "Lync (Plan 2 for Students)",
+                    "MCOVOICECONF": "Skype for Business Online (Plan 3)",
+                    "MCOVOICECONF_FACULTY": "Lync Plan 3 for Faculty",
+                    "MCOVOICECONF_GOV": "Lync for Government (Plan 3G)",
+                    "MCOVOICECONF_STUDENT": "Lync Plan 3 for Students",
+                    "MCVOICECONF": "Lync/Skype for Business Online P3",
+                    "MDM_SALES_COLLABORATION": "Microsoft Dynamics Marketing Sales Collaboration",
+                    "MEE_FACULTY": "Minecraft Education Edition Faculty",
+                    "MEE_STUDENT": "Minecraft Education Edition Student",
+                    "MFA_PREMIUM": "Microsoft Azure Multi-factor Authentication",
+                    "MFA_STANDALONE": "Azure Multi-Factor Authentication Premium Standalone",
+                    "MICROSOFT_BUSINESS_CENTER": "Microsoft Business Center",
+                    "MICROSOFT_SEARCH": "Microsoft Search",
+                    "MICROSOFTBOOKINGS": "Microsoft Bookings",
+                    "MIDSIZEPACK": "Office 365 Midsize Business",
+                    "MINECRAFT_EDUCATION_EDITION": "Minecraft Education Edition",
+                    "MIP_S_CLP1": "Information Protection for Office 365 - Standard",
+                    "MIP_S_CLP2": "Information Protection for Office 365 - Premium",
+                    "MS_TEAMS_IW": "Microsoft Team Trial",
+                    "MYANALYTICS_P2": "Insights By Myanalytics",
+                    "NBENTERPRISE": "Microsoft Social Engagement - Service Discontinuation",
+                    "NBPROFESSIONALFORCRM": "Microsoft Social Engagement Professional",
+                    "NONPROFIT_PORTAL": "Nonprofit Portal",
+                    "O365_BUSINESS": "Microsoft 365 Apps for Business",
+                    "O365_BUSINESS_ESSENTIALS": "Microsoft 365 Business Basic",
+                    "O365_BUSINESS_PREMIUM": "Microsoft 365 Business Standard",
+                    "O365_SB_Relationship_Management": "Outlook Customer Manager",
+                    "OFFICE_BASIC": "Office 365 Basic",
+                    "OFFICE_BUSINESS": "Office 365 Business",
+                    "OFFICE_FORMS_PLAN_2": "Microsoft Forms (Plan 2)",
+                    "OFFICE_FORMS_PLAN_3": "Microsoft Forms (Plan 3)",
+                    "OFFICE365_MULTIGEO": "Multi-Geo Capabilities in Office 365",
+                    "OFFICEMOBILE_SUBSCRIPTION": "OFFICEMOBILE_SUBSCRIPTION",
+                    "OFFICESUBSCRIPTION": "Microsoft 365 Apps for Enterprise",
+                    "OFFICESUBSCRIPTION_FACULTY": "Office 365 ProPlus for Faculty",
+                    "OFFICESUBSCRIPTION_GOV": "Office 365 ProPlus for Government",
+                    "OFFICESUBSCRIPTION_STUDENT": "Office 365 ProPlus for Students",
+                    "ONEDRIVE_BASIC": "OneDrive Basic",
+                    "ONEDRIVEBASIC": "OneDrive Basic",
+                    "ONEDRIVEENTERPRISE": "Onedriveenterprise",
+                    "ONEDRIVESTANDARD": "Onedrivestandard",
+                    "ONEDRIVESTANDARD_GOV": "OneDrive for Business for Government (Plan 1G)",
+                    "PAM_ENTERPRISE": "Office 365 Privileged Access Management",
+                    "PARATURE_ENTERPRISE": "Parature Enterprise",
+                    "PARATURE_ENTERPRISE_GOV": "Parature Enterprise for Government",
+                    "PLANNERSTANDALONE": "Planner Standalone",
+                    "POWER_BI_ADDON": "Power BI for Office 365 Add-on",
+                    "POWER_BI_INDIVIDUAL_USE": "Power BI Individual User",
+                    "POWER_BI_INDIVIDUAL_USER": "Power BI for Office 365 Individual",
+                    "POWER_BI_PRO": "Power BI Pro",
+                    "POWER_BI_STANDALONE": "Power BI for Office 365 Standalone",
+                    "POWER_BI_STANDALONE_FACULTY": "Power BI for Office 365 for Faculty",
+                    "POWER_BI_STANDALONE_STUDENT": "Power BI for Office 365 for Students",
+                    "POWER_BI_STANDARD": "Power BI (free)",
+                    "POWERAPPS_DYN_APPS": "Powerapps for Dynamics 365",
+                    "POWERAPPS_DYN_P2": "Powerapps for Dynamics 365",
+                    "POWERAPPS_DYN_TEAM": "Powerapps for Dynamics 365",
+                    "POWERAPPS_INDIVIDUAL_USER": "Microsoft PowerApps and Logic flows",
+                    "POWERAPPS_O365_P1": "Powerapps for Office 365",
+                    "POWERAPPS_O365_P2": "Powerapps for Office 365",
+                    "POWERAPPS_O365_P3": "Powerapps for Office 365 Plan 3",
+                    "POWERAPPS_O365_S1": "Powerapps for Office 365 K1",
+                    "POWERAPPS_P2_VIRAL": "PowerApps Trial",
+                    "POWERAPPS_PER_USER": "Power Apps Per User Plan",
+                    "POWERAPPS_VIRAL": "Microsoft PowerApps Plan 2 Trial",
+                    "POWERAPPSFREE": "Microsoft PowerApps",
+                    "POWERFLOW_P2": "Microsoft PowerApps Plan 2 Trial",
+                    "POWERFLOWSFREE": "Logic flows",
+                    "POWERVIDEOSFREE": "Microsoft Power Videos Basic",
+                    "PREMIUM_ENCRYPTION": "Premium Encryption In Office 365",
+                    "PROJECT_CLIENT_SUBSCRIPTION": "Project Online Desktop Client",
+                    "PROJECT_ESSENTIALS": "Project Online Essentials",
+                    "PROJECT_PROFESSIONAL": "Project Online Professional",
+                    "PROJECTCLIENT": "Project for Office 365",
+                    "PROJECTCLIENT_FACULTY": "Project Pro for Office 365 for Faculty",
+                    "PROJECTCLIENT_GOV": "Project Pro for Office 365 for Government",
+                    "PROJECTCLIENT_STUDENT": "Project Pro for Office 365 for Students",
+                    "PROJECTESSENTIALS": "Project Online Essentials",
+                    "PROJECTESSENTIALS_GOV": "Project Essentials for Government",
+                    "PROJECTONLINE_PLAN_1": "Project Online Premium Without Project Client",
+                    "PROJECTONLINE_PLAN_1_FACULTY": "Project Online for Faculty Plan 1",
+                    "PROJECTONLINE_PLAN_1_GOV": "Project Plan 1for Government",
+                    "PROJECTONLINE_PLAN_1_STUDENT": "Project Online for Students Plan 1",
+                    "PROJECTONLINE_PLAN_2": "Project Online With Project for Office 365",
+                    "PROJECTONLINE_PLAN_2_FACULTY": "Project Online for Faculty Plan 2",
+                    "PROJECTONLINE_PLAN_2_GOV": "Project Plan 2 for Government",
+                    "PROJECTONLINE_PLAN_2_STUDENT": "Project Online for Students Plan 2",
+                    "PROJECTONLINE_PLAN1_FACULTY": "Project Online Professional P1 for Faculty",
+                    "PROJECTONLINE_PLAN1_STUDENT": "Project Online Professional P1 for Students",
+                    "PROJECTPREMIUM": "Project Online Premium",
+                    "PROJECTPROFESSIONAL": "Project Online Professional",
+                    "PROJECTWORKMANAGEMENT": "Microsoft Planner",
+                    "RECORDS_MANAGEMENT": "Microsoft Records Management",
+                    "RIGHTSMANAGEMENT": "Azure Information Protection Plan 1",
+                    "RIGHTSMANAGEMENT_ADHOC": "Rights Management Adhoc",
+                    "RIGHTSMANAGEMENT_FACULTY": "Azure Active Directory Rights for Faculty",
+                    "RIGHTSMANAGEMENT_GOV": "Azure Active Directory Rights for Government",
+                    "RIGHTSMANAGEMENT_STANDARD_FACULTY": "Information Rights Management for Faculty",
+                    "RIGHTSMANAGEMENT_STANDARD_STUDENT": "Information Rights Management for Students",
+                    "RIGHTSMANAGEMENT_STUDENT": "Azure Active Directory Rights for Students",
+                    "RMS_S_ADHOC": "Rights Management Adhoc",
+                    "RMS_S_ENTERPRISE": "Microsoft Azure Active Directory Rights",
+                    "RMS_S_ENTERPRISE_GOV": "Azure Rights Management",
+                    "RMS_S_PREMIUM": "Azure Information Protection Premium P1",
+                    "RMS_S_PREMIUM2": "Azure Information Protection Premium P2",
+                    "SAFEDOCS": "Office 365 Safedocs",
+                    "SCHOOL_DATA_SYNC_P1": "School Data Sync (Plan 1)",
+                    "SCHOOL_DATA_SYNC_P2": "School Data Sync (Plan 2)",
+                    "SHAREPOINT_PROJECT": "Project Online Service",
+                    "SHAREPOINT_PROJECT_EDU": "Project Online for Education",
+                    "SHAREPOINT_S_DEVELOPER": "SHAREPOINT_S_DEVELOPER",
+                    "SHAREPOINTDESKLESS": "Sharepoint Online Kiosk",
+                    "SHAREPOINTDESKLESS_GOV": "SharePoint Online Kiosk",
+                    "SHAREPOINTENTERPRISE": "Sharepoint Online (Plan 2)",
+                    "SHAREPOINTENTERPRISE_EDU": "Sharepoint Plan 2 for EDU",
+                    "SHAREPOINTENTERPRISE_FACULTY": "SharePoint (Plan 2 for Faculty)",
+                    "SHAREPOINTENTERPRISE_GOV": "SharePoint P2 for Government",
+                    "SHAREPOINTENTERPRISE_STUDENT": "SharePoint (Plan 2 for Students)",
+                    "SHAREPOINTENTERPRISE_YAMMER": "SharePoint (Plan 2 with Yammer)",
+                    "SHAREPOINTLITE": "Sharepointlite",
+                    "SHAREPOINTPARTNER": "SharePoint Online Partner Access",
+                    "SHAREPOINTSTANDARD": "Sharepoint Online (Plan 1)",
+                    "SHAREPOINTSTANDARD_EDU": "SharePoint Plan 1 for EDU",
+                    "SHAREPOINTSTANDARD_FACULTY": "SharePoint (Plan 1 for Faculty)",
+                    "SHAREPOINTSTANDARD_GOV": "SharePoint for Government (Plan 1G)",
+                    "SHAREPOINTSTANDARD_STUDENT": "SharePoint (Plan 1 for Students)",
+                    "SHAREPOINTSTANDARD_YAMMER": "SharePoint (Plan 1 with Yammer)",
+                    "SHAREPOINTSTORAGE": "SharePoint Online Storage",
+                    "SHAREPOINTWAC": "Office Online",
+                    "SHAREPOINTWAC_DEVELOPER": "Office Online for Developer",
+                    "SHAREPOINTWAC_EDU": "Office for The Web (Education)",
+                    "SHAREPOINTWAC_GOV": "Office Online for Government",
+                    "SKU ID": "Product Name",
+                    "SKU_Dynamics_365_for_HCM_Trial": "Dynamics 365 for Talents",
+                    "SMB_APPS": "Microsoft Business Apps",
+                    "SMB_BUSINESS": "Microsoft 365 Apps for Business",
+                    "SMB_BUSINESS_ESSENTIALS": "Microsoft 365 Business Basic",
+                    "SMB_BUSINESS_PREMIUM": "Microsoft 365 Business Standard",
+                    "SOCIAL_ENGAGEMENT_APP_USER": "Dynamics 365 AI for Market Insights",
+                    "SPB": "Microsoft 365 Business Premium",
+                    "SPE_E3": "Microsoft 365 E3",
+                    "SPE_E3_USGOV_DOD": "Microsoft 365 E3_USGOV_DOD",
+                    "SPE_E3_USGOV_GCCHIGH": "Microsoft 365 E3_USGOV_GCCHIGH",
+                    "SPE_E5": "Microsoft 365 E5",
+                    "SPE_F1": "Microsoft 365 F3",
+                    "SPZA": "App Connect",
+                    "SPZA_IW": "App Connect Iw",
+                    "SQL_IS_SSIM": "Microsoft Power BI Information Services Plan 1",
+                    "STANDARDPACK": "Office 365 E1",
+                    "STANDARDPACK_FACULTY": "Office 365 Education E1 for Faculty",
+                    "STANDARDPACK_GOV": "Office 365 Enterprise E1 for Government",
+                    "STANDARDPACK_STUDENT": "Office 365 Education E1 for Students",
+                    "STANDARDWOFFPACK": "Office 365 E2",
+                    "STANDARDWOFFPACK_FACULTY": "Office 365 Education E2 for Faculty",
+                    "STANDARDWOFFPACK_GOV": "Office 365 Enterprise E2 for Government",
+                    "STANDARDWOFFPACK_IW_FACULTY": "Office 365 Education E2 for Faculty",
+                    "STANDARDWOFFPACK_IW_STUDENT": "Office 365 Education E2 for Students",
+                    "STANDARDWOFFPACK_STUDENT": "Office 365 Education E2 for Students",
+                    "STANDARDWOFFPACKPACK_FACULTY": "Office 365 Plan A2 for Faculty",
+                    "STANDARDWOFFPACKPACK_STUDENT": "Office 365 Plan A2 for Students",
+                    "STREAM": "Microsoft Stream",
+                    "STREAM_O365_E1": "Microsoft Stream for O365 E1 SKU",
+                    "STREAM_O365_E3": "Microsoft Stream for O365 E3 SKU",
+                    "STREAM_O365_E5": "Microsoft Stream for O365 E5 SKU",
+                    "STREAM_O365_K": "Microsoft Stream for O365 K SKU",
+                    "SWAY": "Sway",
+                    "TEAMS_AR_DOD": "Microsoft Teams for Dod (ar)",
+                    "TEAMS_AR_GCCHIGH": "Microsoft Teams for Gcchigh (ar)",
+                    "TEAMS_EXPLORATORY ": "Microsoft Teams Exploratory Trial",
+                    "TEAMS_COMMERCIAL_TRIAL ": "Microsoft Teams Commercial Cloud Trial",
+                    "TEAMS1": "Microsoft Teams",
+                    "THREAT_INTELLIGENCE": "Office 365 Advanced Threat Protection (Plan 2)",
+                    "Trial DYN365_AI_SERVICE_INSIGHTS": "Dynamics 365 Customer Service Insights",
+                    "VIDEO_INTEROP": "Polycom Skype Meeting Video Interop for Skype for Business",
+                    "Virtualization Rights for Windows 10 (E3/E5+VDA)": "Windows 10 Enterprise (new)",
+                    "VISIO_CLIENT_SUBSCRIPTION": "Visio Online",
+                    "VISIOCLIENT": "Visio Online Plan 2",
+                    "VISIOCLIENT_FACULTY": "Visio Pro for Office 365 for Faculty",
+                    "VISIOCLIENT_GOV": "Visio Pro for Office 365 for Government",
+                    "VISIOCLIENT_STUDENT": "Visio Pro for Office 365 for Students",
+                    "VISIOONLINE": "Visioonline",
+                    "VISIOONLINE_PLAN1": "Visio Online Plan 1",
+                    "WACONEDRIVEENTERPRISE": "Onedrive for Business (Plan 2)",
+                    "WACONEDRIVESTANDARD": "Onedrive for Business (Plan 1)",
+                    "WACONEDRIVESTANDARD_GOV": "OneDrive for Business with Office Web Apps for Government",
+                    "WACSHAREPOINTENT": "Office Web Apps with SharePoint Plan 2",
+                    "WACSHAREPOINTENT_FACULTY": "Office Web Apps (Plan 2 For Faculty)",
+                    "WACSHAREPOINTENT_GOV": "Office Web Apps (Plan 2G for Government)",
+                    "WACSHAREPOINTENT_STUDENT": "Office Web Apps (Plan 2 For Students)",
+                    "WACSHAREPOINTSTD": "Office Online",
+                    "WACSHAREPOINTSTD_FACULTY": "Office Web Apps (Plan 1 For Faculty)",
+                    "WACSHAREPOINTSTD_GOV": "Office Web Apps (Plan 1G for Government)",
+                    "WACSHAREPOINTSTD_STUDENT": "Office Web Apps (Plan 1 For Students)",
+                    "WHITEBOARD_FIRSTLINE1": "Whiteboard (Firstline)",
+                    "WHITEBOARD_PLAN2": "Whiteboard (Plan 2)",
+                    "WHITEBOARD_PLAN3": "Whiteboard (Plan 3)",
+                    "WIN_DEF_ATP": "Microsoft Defender Advanced Threat Protection",
+                    "WIN10_ENT_LOC_F1": "Windows 10 Enterprise E3 (local Only)",
+                    "WIN10_PRO_ENT_SUB": "Windows 10 Enterprise E3",
+                    "WIN10_VDA_E3": "Windows 10 Enterprise E3",
+                    "WIN10_VDA_E5": "Windows 10 Enterprise E5",
+                    "WINBIZ": "Windows 10 Business", 
+                    "WINDEFATP": "Microsoft Defender Advanced Threat Protection",
+                    "WINDOWS_STORE": "Windows Store Service",
+                    "WORKPLACE_ANALYTICS": "Microsoft Workplace Analytics",
+                    "YAMMER_EDU": "Yammer for Academic",
+                    "YAMMER_ENTERPRISE": "Yammer Enterprise",
+                    "YAMMER_ENTERPRISE_STANDALONE": "Yammer Enterprise Standalone",
+                    "YAMMER_MIDSIZE": "Yammer Midsize"
+        }
+        
+        
+                intPage();
+        
+            </script>
+        
+        </html>
+        
+      
+
+        
+        <!-- project team & activity end -->
+
+      </section>
+      <div class="text-right">
+        <div class="credits">
+          <!--
+         
+        </div>
+      </div>
+    </section>
+    <main content end-->
+  </section>
+  <!-- container section start -->
+
+  <!-- javascripts -->
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery-ui-1.10.4.min.js"></script>
+  <script src="js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+  <!-- bootstrap -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- nice scroll -->
+  <script src="js/jquery.scrollTo.min.js"></script>
+  <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+  <!-- charts scripts -->
+  <script src="assets/jquery-knob/js/jquery.knob.js"></script>
+  <script src="js/jquery.sparkline.js" type="text/javascript"></script>
+  <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+  <script src="js/owl.carousel.js"></script>
+  <!-- jQuery full calendar -->
+  <script src="js/fullcalendar.min.js"></script>
+    <!-- Full Google Calendar - Calendar -->
+    <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+    <!--script for this page only-->
+    <script src="js/calendar-custom.js"></script>
+    <script src="js/jquery.rateit.min.js"></script>
+    <!-- custom select -->
+    <script src="js/jquery.customSelect.min.js"></script>
+    <script src="assets/chart-master/Chart.js"></script>
+
+    <!--custome script for all page-->
+    <script src="js/scripts.js"></script>
+    <!-- custom script for this page-->
+    <script src="js/sparkline-chart.js"></script>
+    <script src="js/easy-pie-chart.js"></script>
+    <script src="js/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="js/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="js/xcharts.min.js"></script>
+    <script src="js/jquery.autosize.min.js"></script>
+    <script src="js/jquery.placeholder.min.js"></script>
+    <script src="js/gdp-data.js"></script>
+    <script src="js/morris.min.js"></script>
+    <script src="js/sparklines.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
+   
+
+</body>
+
+</html>

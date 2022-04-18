@@ -1,0 +1,273 @@
+
+<html>
+
+    <style>
+        .logItem {
+          background-color:lightgrey; 
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+        }
+        
+        .logItem p {
+          display: inline-block;
+          width:18%;
+          overflow: hidden;
+        }
+
+        .logItem textarea {
+          
+          width:100%;
+          height: 60%;
+        }
+
+     
+
+        .loadMore {
+            background-color: aqua;
+            font-style: italic; 
+            text-align: center; 
+            padding: 15px;
+        }
+        </style>
+
+    <body>
+        <div id="message"></div>
+        <div><button onclick="downloadLogs()">download all available logs as CSV</button></div>
+        <a id="dlTrigger" style="display:none"></a>
+        Filter demo: Operatored by:<input type="text" id="operator"><button onclick="initPage()">query</button>
+        <div id="loglistView">
+            <div class="logItem" style="background-color: aqua;font-style: italic;">
+                <hr>
+                <p> Date </p>
+                <p> Category </p>
+                <p> Acitivty </p>  
+                <p> Status </p>
+                <p> Operator</p>
+            </div>
+            <div id="loglist"></div>
+            <div id="loadMore" class="loadmore"></div>
+        </div>
+
+       
+
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        var accessToken=sessionStorage.getItem("storageName");
+        var ItemView = " <div onclick='showContent(this)' class='logItem'><hr><p > @Date </p><p > @Category </p><p > @Acitivty </p><p> @Status </p><p> @Operator </p><textarea id='obj' style='display:none' >@obj</textarea></div>"
+
+        function initPage(){
+            var filter = $("#operator").val() == ""?"": "&$filter=startswith(initiatedBy/user/userPrincipalName,'"+$("#operator").val()+"')" ;
+            $("#loglist").empty();
+            $("#loadMore").empty();
+            $.ajax({
+                url: 'https://graph.microsoft.com/v1.0/auditLogs/directoryaudits?$top=20'+ filter,
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+                    var loglist = data.value;
+                    var nextpageUrl = data['@odata.nextLink'];
+                    if(nextpageUrl){
+                        $("#loadMore").append("<div onclick='loadMore(\""+ nextpageUrl  +" \")'>load more...</div>");
+                    }
+                    loglist.forEach(element => {
+                        var view = ItemView.replace("@Date",new Date(element.activityDateTime).toString())
+                        .replace("@Category",element.category)
+                        .replace("@Acitivty",element.activityDisplayName)
+                        .replace("@Status",element.result)
+                        .replace("@Operator",element.initiatedBy.app == null?element.initiatedBy.user.userPrincipalName:element.initiatedBy.app.displayName )
+                        .replace("@obj",JSON.stringify(element,null, "\t"));
+                        $("#loglist").append(view);
+                    });
+                },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                }
+            });
+        }
+
+        function loadMore(url){
+
+            $.ajax({
+                url: url,
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+                    var loglist = data.value;
+                    var nextpageUrl = data['@odata.nextLink'];
+                    
+                    if(nextpageUrl){
+                        $("#loadMore").empty();
+                        $("#loadMore").append("<div onclick='loadMore(\""+ nextpageUrl  +" \")'>load more...</div>");
+                    }else{
+                        $("#loadMore").empty();
+                    }
+                    loglist.forEach(element => {
+                        var view = ItemView.replace("@Date",new Date(element.activityDateTime).toString())
+                        .replace("@Category",element.category)
+                        .replace("@Acitivty",element.activityDisplayName)
+                        .replace("@Status",element.result)
+                        .replace("@Operator",element.initiatedBy.app == null?element.initiatedBy.user.userPrincipalName:element.initiatedBy.app.displayName )
+                        .replace("@obj",JSON.stringify(element,null, "\t"));
+
+                        $("#loglist").append(view);
+                    });
+                },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                    document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                }
+            });
+        }
+
+        function showContent(item){
+            $(item).find("#obj").attr("style") == "display:none"?$(item).find("#obj").attr("style",""):$(item).find("#obj").attr("style","display:none");
+        }
+
+        // function downloadLogs(){
+        //     $.ajax({
+        //         url: 'https://graph.microsoft.com/v1.0/auditLogs/directoryaudits',
+        //         type: 'get',
+        //         headers: {
+        //             "Content-type": 'application/json', 
+        //             "Authorization":"Bearer " + accessToken
+        //         },
+        //         success: function (data) {
+        //             var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data,null,"\t"));
+        //             var dlTrigger = document.getElementById('dlTrigger');
+        //             dlTrigger.setAttribute("href",dataStr);
+        //             dlTrigger.setAttribute("download", "AuditLogs.json");
+        //             dlTrigger.click();
+                    
+        //         },
+        //         error:function(data){
+        //             var response = JSON.parse(data.responseText)
+        //             document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+        //         }});
+
+        // }
+
+        function downloadLogs(){
+            $.ajax({
+                url: 'https://graph.microsoft.com/v1.0/auditLogs/directoryaudits',
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+                    var items = data.value;
+                    var headers = {
+                    Date: "Date ",
+                    ID:"Activity ID",
+                    CorrelationId: "CorrelationId",
+                    Service: "Service",
+                    Category: "Category",
+                    Result:"Result",
+                    ResultReason:"Result Reason",
+                    ActivityDisplayName:"Activity Display Name",
+                    InitiatedBy:"Initiated By",
+                    TargetResources:"Target Resources",
+                    AdditionalDetails:"Additional Details"
+                };
+
+                itemsNotFormatted = items;
+
+                var itemsFormatted = [];
+
+                // format the data
+                itemsNotFormatted.forEach((item) => {
+
+                    itemsFormatted.push({
+                        Date: new Date(item.activityDateTime).toString(),
+                        ID:item.id,
+                        CorrelationId: item.correlationId,
+                        Service: item.loggedByService,
+                        Category: item.category,
+                        Result:item.result,
+                        ResultReason:item.resultReason,
+                        ActivityDisplayName:item.activityDisplayName,
+                        InitiatedBy:JSON.stringify(item.initiatedBy).replace(/,/g, ' '),
+                        TargetResources:JSON.stringify(item.targetResources).replace(/,/g, ' '),
+                        AdditionalDetails:JSON.stringify(item.additionalDetails).replace(/,/g, ' '),
+                    });
+                });
+                
+                var fileTitle = 'AuditLogs'; // or 'my-unique-title'
+
+                exportCSVFile(headers, itemsFormatted, fileTitle); // call the exportCSVFile() function to process the JSON and trigger the download
+  
+                },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                    document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+            }});
+
+
+        }
+
+        function convertToCSV(objArray) {
+            var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+            var str = '';
+
+            for (var i = 0; i < array.length; i++) {
+                var line = '';
+                for (var index in array[i]) {
+                    if (line != '') line += ','
+
+                    line += array[i][index];
+                }
+
+                str += line + '\r\n';
+            }
+
+            return str;
+        }
+
+        function exportCSVFile(headers, items, fileTitle) {
+            if (headers) {
+                items.unshift(headers);
+            }
+
+            // Convert Object to JSON
+            var jsonObject = JSON.stringify(items);
+
+            var csv = this.convertToCSV(jsonObject);
+
+            var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+
+            var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            if (navigator.msSaveBlob) { // IE 10+
+                navigator.msSaveBlob(blob, exportedFilenmae);
+            } else {
+                var link = document.createElement("a");
+                if (link.download !== undefined) { // feature detection
+                    // Browsers that support HTML5 download attribute
+                    var url = URL.createObjectURL(blob);
+                    link.setAttribute("href", url);
+                    link.setAttribute("download", exportedFilenmae);
+                    link.style.visibility = 'hidden';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            }
+        }
+
+       
+
+    initPage();
+
+    </script>
+
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link rel="shortcut icon" href="../img/favicon.png">
+
+  <title>SYBA | User List</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- full calendar css-->
+  <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+  <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+  <!-- easy pie chart-->
+  <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+  <!-- owl carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+  <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/fullcalendar.css">
+  <link href="css/widgets.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet" />
+  <link href="css/xcharts.min.css" rel=" stylesheet">
+  <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+  <!-- =======================================================
+    Theme Name: NiceAdmin
+    Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+ 
+</head>
+
+<body>
+  <!-- container section start -->
+  <section id="container" class="">
+
+
+    <header class="header white-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+      </div>
+
+      <!--logo start-->
+      
+      <a href="index.html" class="logo mr-auto"><img src="../img/syba.png" width="200" height="40" alt="" class="img-fluid"></a>
+      <!--logo end-->
+
+     
+      </div>
+
+      
+                   <!-- user login dropdown start-->
+          <!-- user login dropdown end -->
+        </ul>
+        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+          <li class="active">
+            <a class="" href="index.html">
+                          <i class="icon_house_alt"></i>
+                          <span>Home</span>
+                      </a>
+          </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="icon_desktop"></i>
+                          <span>User Management</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" href="Adduser.html">Add User</a></li>
+              <li><a class="" href="Userlist.html">User List</a></li>
+              <li><a class="" href="assignlicense.html">Assign License</a></li>
+              <li><a class="" href="auditlog.html">Audit Log</a></li>
+              
+            </ul>
+          </li>
+          <li>
+            <li class="sub-menu">
+              <a href="javascript:;" class="">
+                <i class="icon_desktop"></i>
+                <span>Cost Management</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+              </a>
+              <ul class="sub">
+                <li><a class="" href="O365Products.html">Office Products</a></li>
+                <li><a class="" href="LicenseManagement.html">License Management</a></li>
+
+            </ul>
+          </li>
+          <li>
+            <a class="" href="">
+                          <i class="icon_piechart"></i>
+                          <span>ACM</span>
+
+                      </a>
+
+                    </li>
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-list-alt"></i>User List</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="fa fa-list-alt"></i>User List</li>
+            </ol>
+          </div>
+        </div>
+        <!-- Today status end -->
+
+          <style>
+              .userItem {
+                background-color:lightgrey; 
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+              }
+              
+              .userItem p {
+                display: inline-block;
+                width:20%
+              }
+      
+              .loadMore {
+                display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: rgb(71, 71, 71);
+      color: rgb(255, 255, 255);
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 4px;
+              }
+
+              #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: rgb(71, 71, 71);
+      color: rgb(255, 255, 255);
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    
+    #myBtn:hover {
+      background-color: #555;
+    }
+
+  input[type=text] {
+  padding: 6px;
+  font-size: 15px;
+  border: 1px solid grey;
+  float: left;
+  width: 23%;
+  background: #ffffff;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+              </style>
+          <body>
+              <div id="message"></div>
+              <a id="dlTrigger" style="display:none"></a>
+              
+             
+                <input type="text" placeholder="Search.." name="search" id="operator">
+                <button type="submit" class="btn btn-default" onclick="initPage()"><i class="fa fa-search"></i></button><br>
+             
+            <!--<input type="text" name="search" placeholder="Search.." id="operator"><button onclick="initPage()" class="btn btn-primary">Search</button><br><br>-->  
+              
+             <!-- <div class="row">
+                <div class="col-lg-12">
+                  <section class="panel">
+                    <header class="panel-heading">
+                      User List
+                    </header>
+                    
+                    <table class="table table-striped table-advance table-hover">
+                      <tbody>
+                        <tr>
+                          <th><i class="icon_profile"></i> Display Name</th>
+                          <th><i class="icon_mail_alt"></i> Email</th>
+                          <th><i class="icon_pin_alt"></i> Job Title</th>
+                          <th><i class="icon_cogs"></i> Action</th>
+                        </tr>
+                        <tr>
+                          <td>Angeline Mcclain</td>
+                          <td>dale@chief.info</td>
+                          <td>Rosser</td>
+                          <td>
+                            <div class="btn-group">
+                              <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
+                              <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                              <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                            </div>
+                          </td>
+                        </tr>
+-->
+              <div id="userListView" >
+                  <div class="userItem" style="background-color: rgb(206, 206, 206);" align="center">
+                      <hr>
+                      <p><i class="icon_profile"></i> <b>Display Name</b></p>
+                      <p><i class="icon_mail_alt"></i> <b>Email Address </b></p>
+                      <p><i class="icon_genius"></i> <b>Department </b></p>
+                      <p><i class="icon_cogs"></i><b> Action</b> </p> 
+                  </div>
+                  <div id="userList" align="center"></div><br>
+                  <div id="loadMore" class="loadmore"></div>
+              </div>
+              <br>
+              <div id="profileEdit" hidden="hidden">
+                  <input type="hidden" id="editObjId"/>
+                  <div class="row">
+                    <div class="col-lg-12">
+                    <section class="panel">
+                    <header class="panel-heading">
+                         Update User Details
+                       </header>
+                      <div class="panel-body">
+                        <form class="form-horizontal">
+                           <div class="form-group">
+                            <label class="col-sm-2 control-label">* Display Name: </label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="displayName" name="displayName" value="" required>
+                            </div>
+                     </div>
+                     <div class="form-group">
+                      <label class="col-sm-2 control-label">* Given Name: </label>
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" id="givenName" name="givenName" value="" required>
+                      </div>
+                     </div>
+                     <div class="form-group">
+                      <label class="col-sm-2 control-label">* Job Title: </label>
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" id="jobTitle" name="jobTitle" value="" required>
+                      </div>
+                     </div>
+                     <div class="form-group">
+                      <label class="col-sm-2 control-label">* Department: </label>
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" id="department" name="department" value="" required>
+                      </div>
+                  
+                     </div>
+                     <div class="form-group">
+                      <label class="col-sm-2 control-label">* Mobile Phone: </label>
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" id="mobilePhone" name="mobilePhone" value="" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">* Enable Sign-In: </label>
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" id="accountEnabled" name="accountEnabled" value="" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label">  </label>
+                      <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary" onclick="submitEdit()">Update</button>
+                        <button class="btn btn-default" onclick="cancel()"> Cancel</button> 
+                      </div>
+                    </div>
+                </section>
+                </div>
+                  </div>
+                  </div>
+              <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+          </body>
+      
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      
+          <script>
+              var accessToken=sessionStorage.getItem("storageName");
+
+              var ItemView = " <div id='@id' class='userItem'><br><p id='@id-obj' style='display:none'>@obj</p><p > @displayName </p><p > @mail </p><p> @department </p> <p class='nav li'> <button class='btn btn-primary' onclick='edit(\"@id-obj\")' >Edit</button><button class='btn btn-danger' onclick='remove(\"@id\")' >Remove</button> </p></div>"
+              //Get the button
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+function initPage(){
+            var filter = $("#operator").val() == ""?"": "&$filter=startswith(initiatedBy/user/userPrincipalName,'"+$("#operator").val()+"')" ;
+            $("#userList").empty();
+            $("#loadMore").empty();
+            $.ajax({
+              url: 'https://graph.microsoft.com/beta/users?$top=10'+ filter,
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+                          var userlist = data.value;
+                          var nextpageUrl = data['@odata.nextLink'];
+                          if(nextpageUrl){
+                              $("#loadMore").append("<div onclick='loadMore(\""+ nextpageUrl  +" \")'><button class='btn btn-default'>Load More...</button></div>");
+                          }
+                          userlist.forEach(element => {
+                              var view = ItemView.replace(/@id/g,element.id).replace("@displayName",element.displayName).replace("@mail",element.mail).replace("@department",element.department).replace("@obj",JSON.stringify(element));
+                              console.log(JSON.stringify(element));
+      
+                              $("#userList").append(view);
+                          });
+                      },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                }
+            });
+        }
+
+      
+              function loadMore(url){
+      
+                  $.ajax({
+                      url: url,
+                      type: 'get',
+                      headers: {
+                          "Content-type": 'application/json', 
+                          "Authorization":"Bearer " + accessToken
+                      },
+                      success: function (data) {
+                          var userlist = data.value;
+                          var nextpageUrl = data['@odata.nextLink'];
+                          
+                          if(nextpageUrl){
+                              $("#loadMore").empty();
+                              $("#loadMore").append("<button class='btn btn-default' onclick='loadMore(\""+ nextpageUrl  +" \")'>Load More...</button>");
+                          }
+                          userlist.forEach(element => {
+                              var view = ItemView.replace(/@id/g,element.id).replace("@displayName",element.displayName).replace("@mail",element.mail).replace("@department",element.department).replace("@obj",JSON.stringify(element));
+                              $("#userList").append(view);
+                          });
+                      },
+                      error:function(data){
+                          var response = JSON.parse(data.responseText)
+                          document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                      }
+                  });
+              }
+              function remove(id) {
+  confirm("Press OK");
+}
+              function remove(id){
+                  $.ajax({
+                      url: 'https://graph.microsoft.com/v1.0/users/' + id,
+                      type: 'delete',
+                      headers: {
+                          "Content-type": 'application/json', 
+                          "Authorization":"Bearer " + accessToken
+                          
+                      },
+                      
+                      success: function (data) {
+                          alert("User has been removed!");
+                          $("#"+id).remove();
+                      },
+                      error:function(data){
+                          var response = JSON.parse(data.responseText)
+                          document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                      }
+                  });
+              }
+
+
+
+
+      
+              function edit(obj){
+                 $("#userListView").hide();
+                 $("#profileEdit").show();
+                 var obj = JSON.parse(document.getElementById(obj).innerHTML);
+                 $("#editObjId").val(obj.id);
+                 $("#displayName").val(obj.displayName);
+                 $("#givenName").val(obj.givenName);
+                 $("#jobTitle").val(obj.jobTitle);
+                 $("#department").val(obj.department);
+                 $("#mobilePhone").val(obj.mobilePhone);
+                 $("#accountEnabled").val(obj.accountEnabled);
+                 $("#preferredLanguage").val(obj.preferredLanguage);
+              }
+      
+              function cancel(){
+                  $("#userListView").show();
+                  $("#profileEdit").hide();
+      
+              }
+      
+              function submitEdit(){
+                  var user = {};
+                  user.displayName = $("#displayName").val();
+                  user.givenName = $("#givenName").val();
+                  user.jobTitle = $("#jobTitle").val();
+                  user.mobilePhone = $("#mobilePhone").val();
+                  user.preferredLanguage = $("#preferredLanguage").val();
+            
+                  $.ajax({
+                      url: 'https://graph.microsoft.com/v1.0/users/' + $("#editObjId").val(),
+                      type: 'PATCH',
+                      data: JSON.stringify(user),
+                      headers: {
+                          "Content-type": 'application/json', 
+                          "Authorization":"Bearer " + accessToken
+                      },
+                      dataType:"json",
+                      success: function (data) {
+                          alert("user update successfully");
+                          $("#userListView").show();
+                          $("#profileEdit").hide();
+                          $("#userList").empty();
+                          initPage();
+                      },
+                      error:function(data){
+                          var response = JSON.parse(data.responseText)
+                      document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                      }
+                  });
+              
+      
+              }
+      
+              initPage();
+      
+          </script>
+      
+      </html>
+      
+      
+
+        
+        <!-- project team & activity end -->
+
+      </section>
+      <div class="text-right">
+        <div class="credits">
+          <!--
+         
+        </div>
+      </div>
+    </section>
+    <!--main content end-->
+  </section>
+  <!-- container section start -->
+
+  <!-- javascripts -->
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery-ui-1.10.4.min.js"></script>
+  <script src="js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+  <!-- bootstrap -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- nice scroll -->
+  <script src="js/jquery.scrollTo.min.js"></script>
+  <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+  <!-- charts scripts -->
+  <script src="assets/jquery-knob/js/jquery.knob.js"></script>
+  <script src="js/jquery.sparkline.js" type="text/javascript"></script>
+  <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+  <script src="js/owl.carousel.js"></script>
+  <!-- jQuery full calendar -->
+  <script src="js/fullcalendar.min.js"></script>
+    <!-- Full Google Calendar - Calendar -->
+    <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+    <!--script for this page only-->
+    <script src="js/calendar-custom.js"></script>
+    <script src="js/jquery.rateit.min.js"></script>
+    <!-- custom select -->
+    <script src="js/jquery.customSelect.min.js"></script>
+    <script src="assets/chart-master/Chart.js"></script>
+
+    <!--custome script for all page-->
+    <script src="js/scripts.js"></script>
+    <!-- custom script for this page-->
+    <script src="js/sparkline-chart.js"></script>
+    <script src="js/easy-pie-chart.js"></script>
+    <script src="js/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="js/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="js/xcharts.min.js"></script>
+    <script src="js/jquery.autosize.min.js"></script>
+    <script src="js/jquery.placeholder.min.js"></script>
+    <script src="js/gdp-data.js"></script>
+    <script src="js/morris.min.js"></script>
+    <script src="js/sparklines.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
+   
+
+</body>
+
+</html>

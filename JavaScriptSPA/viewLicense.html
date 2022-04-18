@@ -1,0 +1,244 @@
+<html>
+    <style>
+        .filterItem  {
+          background-color:lightblue; 
+          margin: 2px;
+        }
+
+        .LicenseDetails div{
+            display: inline-block;
+            border: 1px solid green;
+            }
+
+        .LicenseDetails p{
+            text-align: center;
+        }
+        .LicenseDetails label{
+            margin: 5px;
+        }
+
+        .userItem {
+          background-color:lightgrey; 
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          width: 30%;
+        }
+        
+        .userItem p {
+          display: inline-block;
+          width:40%
+        }
+
+        .loadMore {
+            background-color: aqua;
+            font-style: italic; 
+            text-align: center; 
+            padding-top: 5px;
+            width: 30%;
+        }
+
+    </style>
+
+    <body>
+        <div id="message"></div>
+        <div id="LicenseDetails" class="LicenseDetails">
+            <div >
+                <label>Assigned</label>
+                <p id="assigned"></p>
+            </div>
+            <div >
+                <label>Unassigned</label>
+                <p id="unassigned"></p>
+            </div>
+            <div >
+                <label>All Licenses</label>
+                <p id="all"></p>
+            </div>
+        </div>
+
+        <div id="filterDemo" >
+            <div class = "filterItem" onclick="getAssignedUsers('05e9a617-0261-4cee-bb44-138d3ef5d965',this)"> 
+                <label>Microsoft 365 E3: Click to get all users assigned with Microsoft 365 E3 License </label>
+                <div id="assignedUserList"></div>
+            </div>
+            <div class = "filterItem" onclick="getAssignedUsers('84a661c4-e949-4bd2-a560-ed7766fcaf2b',this)"> 
+                <label>Azure Active Directory Premium P2: Click to get all users assigned with Azure Active Directory Premium P2 </label>
+                <div id="assignedUserList"></div>
+            </div>
+        </div>
+        Click to get license details:
+        <div id="userListView">
+            <div class="userItem" style="background-color: aqua;font-style: italic;">
+
+                <p> user display name </p>
+                <p> user email address </p>
+                
+            </div>
+            <div id="userList"></div>
+            <div id="loadMore" class="loadmore"></div>
+        </div>
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        var accessToken=sessionStorage.getItem("storageName");
+
+        var  ItemView = " <div onClick='getUserAssignedSku(this)' id='@id' class='userItem'><hr><p> @displayName </p><p > @mail </p><div id='licenses'></div></div>"
+
+        function getSubSku(){
+
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/subscribedSkus",
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+
+                    var allSkus = data.value;
+                    var assigned = 0;
+                    var all = 0;
+                    allSkus.forEach(element=>{
+                        if(element.appliesTo=="User" && element.capabilityStatus == "Enabled"){
+                            assigned += element.consumedUnits;
+                            all += element.prepaidUnits.enabled;
+                        }
+                    });
+
+                    $("#assigned").html(assigned);
+                    $("#unassigned").html(all - assigned);
+                    $("#all").html(all);
+                },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                    document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                }
+            });
+        }
+
+        function getAssignedUsers(skuID,obj){
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/users?$filter=assignedLicenses/any(x:x/skuId eq "+ skuID+")",
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+                   var users = data.value;
+                   var userList = $(obj).find("#assignedUserList");
+                   userList.empty();
+                   users.forEach(element => {
+                       userList.append("<div style='background-color:lightyellow;'>"+element.displayName+":" + element.mail+ "</div>")
+                   });
+                },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                    document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                }
+            });
+
+        }
+
+        function getUserAssignedSku(obj){
+            var id = $(obj).attr("id"); 
+            var licenses = $(obj).find("#licenses");
+            licenses.empty();
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/users/"+id+"/licenseDetails",
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+                    $("#userAssignedSkus").empty();
+                    var assigned = data.value; 
+                    if(assigned.length ==0){
+                        var assignedLicneses = "<div style='background-color:lightyellow;'>No license assigned</div>"
+                        licenses.append(assignedLicneses);
+                    }else{
+                        assigned.forEach(element=>{
+                        var assignedLicneses = "<div style='background-color:lightyellow;'>"+element.skuPartNumber+"</div>"
+                        licenses.append(assignedLicneses);
+                        });
+                    }
+                    
+                },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                    document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                }
+            });
+        }
+       
+        function getAllUsers(){
+            $("#loadMore").empty();
+            $.ajax({
+                url: 'https://graph.microsoft.com/v1.0/users?$top=5',
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+                    var userlist = data.value;
+                    var nextpageUrl = data['@odata.nextLink'];
+                    if(nextpageUrl){
+                        $("#loadMore").append("<div onclick='loadMore(\""+ nextpageUrl  +" \")'>load more...</div>");
+                    }
+                    userlist.forEach(element => {
+                        var view = ItemView.replace(/@id/g,element.id).replace("@displayName",element.displayName).replace("@mail",element.mail).replace("@upn",element.userPrincipalName).replace("@obj",JSON.stringify(element));
+
+                        $("#userList").append(view);
+                    });
+                },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                }
+            });
+        }
+
+        function loadMore(url){
+
+            $.ajax({
+                url: url,
+                type: 'get',
+                headers: {
+                    "Content-type": 'application/json', 
+                    "Authorization":"Bearer " + accessToken
+                },
+                success: function (data) {
+                    var userlist = data.value;
+                    var nextpageUrl = data['@odata.nextLink'];
+                    
+                    if(nextpageUrl){
+                        $("#loadMore").empty();
+                        $("#loadMore").append("<div onclick='loadMore(\""+ nextpageUrl  +" \")'>load more...</div>");
+                    }
+                    userlist.forEach(element => {
+                        var view = ItemView.replace(/@id/g,element.id).replace("@displayName",element.displayName).replace("@mail",element.mail).replace("@upn",element.userPrincipalName).replace("@obj",JSON.stringify(element));
+                        $("#userList").append(view);
+                    });
+                },
+                error:function(data){
+                    var response = JSON.parse(data.responseText)
+                    document.getElementById("message").innerHTML="ERROR:" + response.error.message;
+                }
+            });
+        }
+
+        function intPage(){
+            getSubSku();
+            getAllUsers();
+        }
+
+        intPage();
+
+    </script>
+
+</html>

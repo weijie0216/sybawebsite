@@ -10,6 +10,7 @@ function signIn() {
       
       if (myMSALObj.getAccount()) {
         showWelcomeMessage(myMSALObj.getAccount());
+        sessionStorage.setItem("storageName", myMSALObj.accessToken);
       }
     }).catch(error => {
       console.log(error);
