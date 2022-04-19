@@ -500,7 +500,7 @@ Main Components
   color: transparent;
   height: 60px;
   width: 40px;
-  background: rgba(64, 64, 66, 0.8) url("../img/cd-arrow.svg") no-repeat center center;
+  background: rgba(64, 64, 66, 0.8) url("img/cd-arrow.svg") no-repeat center center;
   border-radius: 3px;
   -webkit-transition: background-color 0.3s, opacity 0.3s, visibility 0.3s, -webkit-transform 0.3s;
   -moz-transition: background-color 0.3s, opacity 0.3s, visibility 0.3s, -moz-transform 0.3s;
