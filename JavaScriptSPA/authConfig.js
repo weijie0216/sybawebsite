@@ -6,10 +6,7 @@ const msalConfig = {
   auth: {
     clientId: "3c7ac775-e5d7-4e16-a31c-2ee8abd5175a",
     authority: "https://login.microsoftonline.com/db992bae-4cb3-4086-8c91-55255b0c39fe",
-    knownAuthorities: [],
-    redirectUri: "https://sybawebsite.azurewebsites.net",
-    postLogoutRedirectUri: "https://sybawebsite.azurewebsites.net/logout",
-    navigateToLoginRequestUrl: true,
+    redirectUri: "https://sybawebsite.azurewebsites.net:3000/index.html"
   },
   cache: {
     cacheLocation: "sessionStorage", // This configures where your cache will be stored
